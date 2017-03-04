@@ -1,5 +1,6 @@
 # Introduzione allo Sviluppo do Progetti Videoludici
 **[Fastweb Digital Academy](https://www.fastwebdigital.academy/) + [DigitalBros Game Academy](http://www.dbgameacademy.it/)**
+*13 marzo - 7 aprile 2017*
 
 *Docente: [Marco Secchi](http://marcosecchi.it)*
 
