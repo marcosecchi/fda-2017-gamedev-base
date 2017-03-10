@@ -7,29 +7,10 @@
 ## Contenuti del Corso
 
 ### Introduzione: i Videogiochi
-Lo studente verrà guidato attraverso il mondo dei videogiochi, esplorandone alcuni dei più famosi.
+Dove si esplorerà il mondo dei videogiochi e si farà una breve panoramica agli argomenti del corso.
 
-Gli studenti saranno incoraggiati ad analizzarne i principali punti di forza e le principali pecche, proponendo, a livello teorico, eventuali idee di modifica. Alcuni punti salienti:
-
-* Cos’è un videogioco?
-* È difficile realizzarlo?
-* È meglio un gioco per PC o per cellulare?
-
-### Basi di Programmazione
-Gli studenti verranno introdotti alla programmazione: tramite strumenti visuali e testuali, apprenderanno le principali logiche. Alcuni punti salienti:
-
-* Cosa vuol dire “scrivere del codice”?
-* È difficile scriverlo?
-* Quali competenze servono?
-* Se non so scrivere codice, posso comunque creare un videogioco?
-
-### Gli strumenti per realizzare un Videogioco
-Durante questo modulo, gli studenti cominceranno ad impratichirsi con uno strumento di sviluppo vero e proprio, applicando i concetti imparati in precedenza. Alcuni punti salienti:
-
-* Quanti programmi ci sono per realizzare un gioco?
-* Qual è il migliore?
-* Posso realizzare un videogioco con pochi mezzi a disposizione?
-* Dove pubblico il mio videogioco?
+### Basi di Programmazione e Strumenti
+Dove gli studenti verranno introdotti alle basi di programmazione: tramite strumenti visuali e testuali, ne apprenderanno le principali logiche.
 
 ### Progetto Applicativo
-Durante il corso, la classe sarà guidata (a gruppi) nella realizzazione di un videogioco di tipo grafico, a partire da una serie di asset grafici forniti dall’insegnante ed utilizzando esclusivamente le tecniche imparate durante il corso.
+Dove gli studenti realizzaranno un videogioco, partendo da una serie di *assets* forniti dal docente.
