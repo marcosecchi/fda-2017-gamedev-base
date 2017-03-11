@@ -6,9 +6,9 @@
 
 ## Contenuti del Corso
 
-[Programma dettagliato](https://github.com/marcosecchi/fda-2016-gamedev-base/wiki/Link-Utili)
+[Wiki del Corso](https://github.com/marcosecchi/fda-2016-gamedev-base/wiki)
 
-### Introduzione: i Videogiochi
+### Introduzione allo Sviluppo di Videogiochi
 Dove si esplorerà il mondo dei videogiochi e si farà una breve panoramica agli argomenti del corso.
 
 ### Basi di Programmazione e Strumenti
