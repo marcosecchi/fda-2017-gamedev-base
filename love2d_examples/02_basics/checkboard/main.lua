@@ -1,23 +1,22 @@
 function love.load(arg)
-  tileSize = 32
+  tileSize = 32 -- definisce le dimensioni di una singola tile
 
-  map = {}
+  map = {} -- crea la mappa (un array bidimensionale) che conterrà i dati
 
-  for colums=1,10 do
+  for colums=1,10 do -- cicla sulle colonne
     map[colums] = {}
-
-    for cols=1,10 do
-      if(colums % 2 == 0) then
-        if(cols % 2 == 0) then
-          map[colums][cols] = "white"
+    for rows=1,10 do -- cicla sulle righe
+      if(colums % 2 == 0) then  -- a seconda della righa e della colonna assegna il codice del colore
+        if(rows % 2 == 0) then
+          map[colums][rows] = "white"
         else
-          map[colums][cols] = "black"
+          map[colums][rows] = "black"
         end
       else
-        if(cols % 2 == 0) then
-          map[colums][cols] = "black"
+        if(rows % 2 == 0) then
+          map[colums][rows] = "black"
         else
-          map[colums][cols] = "white"
+          map[colums][rows] = "white"
         end
       end
     end
@@ -28,19 +27,18 @@ function love.update(dt)
 end
 
 function love.draw()
-  for colums=1,table.getn(map) do
-    for cols=1,table.getn(map[colums]) do
-      if(map[colums][cols] == "white") then
+  for colums=1,table.getn(map) do  -- cicla sulle colonne
+    for rows=1,table.getn(map[colums]) do  -- cicla sulle righe
+      if(map[colums][rows] == "white") then  -- controlla il colore assegnato all'elemento della tabella
         love.graphics.setColor(255, 255, 255, 255)
       else
         love.graphics.setColor(0, 0, 0, 255)
       end
-      love.graphics.rectangle(
+      love.graphics.rectangle(  -- disegna il rettangolo posizionandolo rispetto
+                                -- alla riga e colonna corrispondente
           "fill",
-          tileSize * colums - tileSize,
-          tileSize * cols - tileSize,
-          tileSize,
-          tileSize)
+          tileSize * colums - tileSize, tileSize * rows - tileSize,
+          tileSize, tileSize)
     end
   end
 end
