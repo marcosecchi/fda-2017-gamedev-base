@@ -1,5 +1,4 @@
 function love.load(arg)
-  deltaTime = 0
   tileSize = 32
 
   map = {}
@@ -23,18 +22,12 @@ function love.load(arg)
       end
     end
   end
-
-
 end
 
-
 function love.update(dt)
-    deltaTime = dt
 end
 
 function love.draw()
-  love.graphics.print(love.timer.getFPS())
-
   for colums=1,table.getn(map) do
     for cols=1,table.getn(map[colums]) do
       if(map[colums][cols] == "white") then
@@ -43,12 +36,11 @@ function love.draw()
         love.graphics.setColor(0, 0, 0, 255)
       end
       love.graphics.rectangle(
-                    "fill",
-                    tileSize * colums - tileSize,
-                    tileSize * cols - tileSize,
-                    tileSize,
-                    tileSize)
+          "fill",
+          tileSize * colums - tileSize,
+          tileSize * cols - tileSize,
+          tileSize,
+          tileSize)
     end
   end
-
 end
