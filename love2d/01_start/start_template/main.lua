@@ -1,3 +1,7 @@
+--[[
+  Questo esempio mostra il template principale di un videogioco creato in LÖVE
+]]
+
 function love.load(arg)
   -- Questa funzione di 'callback' viene chiamata una sola volta all'inizio del gioco
   -- e serve per inizializzare i valori che verranno utilizzati durante il gioco
