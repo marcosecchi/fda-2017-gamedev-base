@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="fantasy-tileset" tilewidth="32" tileheight="32" tilecount="208" columns="8">
+  <image source="fantasy-tileset.png" width="256" height="832"/>
+ </tileset>
+ <layer name="Background" width="10" height="10">
+  <data encoding="csv">
+19,19,19,19,19,19,19,19,19,19,
+19,9,9,9,9,9,9,10,9,19,
+19,9,9,9,10,9,9,10,9,19,
+19,9,9,9,10,9,9,10,9,19,
+19,9,9,9,10,9,16,10,9,19,
+19,9,9,9,9,9,9,10,9,19,
+19,9,9,9,16,9,9,10,9,19,
+19,9,9,9,9,9,9,10,9,19,
+19,9,9,9,9,9,9,9,9,19,
+19,19,19,19,19,19,19,19,19,19
+</data>
+ </layer>
+ <objectgroup name="Obstacles" visible="0">
+  <object id="1" name="WallTop" x="0" y="0" width="320" height="32">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2" name="WallBottom" x="0" y="288" width="320" height="32">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" name="WallLeft" x="0" y="32" width="32" height="256">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="5" name="WallRight" x="288" y="32" width="32" height="256">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="6" name="Obstacle" x="128" y="64" width="32" height="96">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="7" name="Obstacle" x="192" y="128" width="32" height="32">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" name="Obstacle" x="224" y="32" width="32" height="224">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="12" name="Obstacle" x="128" y="192" width="32" height="32">
+   <properties>
+    <property name="isImpassable" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="SpawnObjects" visible="0">
+  <object id="10" name="Player" x="32" y="224" width="32" height="32"/>
+  <object id="11" name="Exit" x="256" y="64" width="32" height="32"/>
+ </objectgroup>
+</map>

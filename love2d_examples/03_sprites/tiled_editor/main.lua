@@ -3,7 +3,8 @@ local map
 
 function love.load(arg)
   -- instanzio la mappa generata con Tiled utilizzando sti
-  map = sti("assets/map1.lua")
+  map = sti("assets/map1.lua") -- commentare questa linea e decommentare la successiva per vedere un'altra mappa
+--  map = sti("assets/map2.lua")
 
   -- creo gli sprite del personaggio e dell'uscita tramite dua quad
   tileset = love.graphics.newImage("assets/fantasy-tileset.png")
