@@ -6,6 +6,7 @@ local player = {}
 
 player.x = 0
 player.y = 0
+player.img = nil
 player.width = 0
 player.height = 0
 player.velX = 0
