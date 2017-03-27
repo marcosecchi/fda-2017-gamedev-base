@@ -31,6 +31,9 @@ local bulletAudioSource = "assets/laser01.wav"
 local doubleBulletAudioSource = "assets/laser02.wav"
 local bigBulletAudioSource = "assets/laser03.wav"
 
+local bigBulletFireRate = 1
+local bigBulletTimer = 0;
+
 local bullets = {} -- tabella che conterrà i dati dei proiettili
 
 --[[
@@ -81,6 +84,7 @@ end
 
 local function createBigBullet()
   if(not bigBulletActive) then return end
+  if(bigBulletTimer > 0) then return end
 
   local bullet = {}
   -- posiziona il proiettile proprio davanti alla navicella
@@ -92,6 +96,8 @@ local function createBigBullet()
   bullet.height = bullet.img:getHeight()
   bullet.rotation = 0
   table.insert(bullets, bullet)
+
+  bigBulletTimer = bigBulletFireRate
 
   love.audio.newSource(bigBulletAudioSource, "static"):play()
 end
@@ -107,6 +113,11 @@ local function updateBullets(dt)
       table.remove(bullets, k)
     end
   end
+
+  if(bigBulletTimer > 0) then
+    bigBulletTimer = bigBulletTimer - dt
+  end
+
 end
 
 local function drawBullets()
