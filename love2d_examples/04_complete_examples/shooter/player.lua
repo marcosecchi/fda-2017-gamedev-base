@@ -75,7 +75,7 @@ local function createDoubleBullet()
   rBullet.img = love.graphics.newImage(doubleBulletSprite)
   rBullet.x = player.x + player.width / 2
   rBullet.y = player.y - player.height / 2
-  rBullet.speed = 25
+  rBullet.speed = 20
   rBullet.width = rBullet.img:getWidth()
   rBullet.height = rBullet.img:getHeight()
   table.insert(bullets, rBullet)
