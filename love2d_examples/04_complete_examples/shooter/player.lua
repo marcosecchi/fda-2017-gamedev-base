@@ -152,6 +152,16 @@ function player.update(dt)
     player.velX = player.velX + player.dec
   end
 
+  if (love.keyboard.isDown("up")) then
+    player.velY = player.velY - player.acc
+  elseif(love.keyboard.isDown("down")) then
+    player.velY = player.velY + player.acc
+  elseif(player.velY > 0) then
+    player.velY = player.velY - player.dec
+  elseif(player.velY < 0) then
+    player.velY = player.velY + player.dec
+  end
+
   -- se velX è estremamente piccola, per sicurezza, la setto a zero
   if(
     player.velX < 0.3 and
@@ -160,13 +170,20 @@ function player.update(dt)
     player.velX = 0
   end
 
+  if(
+    player.velY < 0.3 and
+    player.velY > -0.3
+  ) then
+    player.velY = 0
+  end
+
   -- controllo il movimento orizzontale (bordi, etc.)
   if (player.x < player.width / 2 - player.velX) then
     player.velX = 0
-    player.x = player.width / 2 - player.velX
+    player.x = player.width / 2
   elseif (player.x > love.graphics.getWidth() - player.velX - player.width / 2) then
     player.velX = 0
-    player.x = love.graphics.getWidth() - player.velX - player.width / 2
+    player.x = love.graphics.getWidth() - player.width / 2
   else
     if(player.velX > player.maxVel) then
       player.velX = player.maxVel
@@ -174,6 +191,22 @@ function player.update(dt)
       player.velX = -player.maxVel
     end
     player.x = player.x + player.velX
+  end
+
+  -- controllo il movimento verticale (bordi, etc.)
+  if (player.y < player.height / 2 - player.velY + 100) then
+    player.velY = 0
+    player.y = player.height / 2 + 100
+  elseif (player.y > love.graphics.getHeight() - player.velY - player.height / 2) then
+    player.velY = 0
+    player.y = love.graphics.getHeight() - player.height / 2
+  else
+    if(player.velY > player.maxVel) then
+      player.velY = player.maxVel
+    elseif((player.velY < -player.maxVel)) then
+      player.velY = -player.maxVel
+    end
+    player.y = player.y + player.velY
   end
 
   updateBullets(dt)
