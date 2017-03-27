@@ -1,14 +1,18 @@
 player = require ("player")
+background = require ("background")
 
 function love.load(arg)
-  player.init()
+  background.load()
+  player.load()
 end
 
 function love.update(dt)
+  background.update(dt)
   player.update(dt)
 end
 
 function love.draw()
+  background.draw()
   player.draw()
 end
 

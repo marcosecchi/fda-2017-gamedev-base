@@ -132,7 +132,7 @@ end
 ]]
 
 -- inizializza i dati della navicella
-function player.init()
+function player.load()
   player.img = love.graphics.newImage(sprite)
   player.width = player.img:getWidth()
   player.height = player.img:getHeight()
