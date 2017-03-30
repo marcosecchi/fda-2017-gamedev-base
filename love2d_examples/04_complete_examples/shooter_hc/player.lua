@@ -1,3 +1,5 @@
+local HC = require "libs.HC"
+
 local player = {}
 
 --[[
@@ -15,6 +17,8 @@ player.acc = 2
 player.dec = 0.4
 player.maxVel = 8
 
+player.isDebug = true
+
 --[[
   *** VARIABILI LOCALI ***
 ]]
@@ -25,12 +29,8 @@ local bigBulletActive = false
 
 local sprite = "assets/player.png"
 local bulletSprite = "assets/laser01.png"
-local doubleBulletSprite = "assets/laser02.png"
-local bigBulletSprite = "assets/laser03.png"
 
 local bulletAudioSource = "assets/laser01.wav"
-local doubleBulletAudioSource = "assets/laser02.wav"
-local bigBulletAudioSource = "assets/laser03.wav"
 
 local bigBulletFireRate = 1
 local bigBulletTimer = 0;
@@ -41,7 +41,7 @@ local bullets = {} -- tabella che conterrà i dati dei proiettili
   *** FUNZIONI LOCALI ***
 ]]
 
-local function createSingleBullet()
+local function createBullet()
   if(not singleBulletActive) then return end
 
   local bullet = {}
@@ -49,66 +49,19 @@ local function createSingleBullet()
   bullet.img = love.graphics.newImage(bulletSprite)
   bullet.x = player.x
   bullet.y = player.y - player.height / 2
-  bullet.speed = 30
+  bullet.speed = 5
   bullet.width = bullet.img:getWidth()
   bullet.height = bullet.img:getHeight()
+  bullet.shapeHC = HC.rectangle(0, 0, bullet.width, bullet.height);
   table.insert(bullets, bullet)
 
   love.audio.newSource(bulletAudioSource, "static"):play()
 end
 
-local function createDoubleBullet()
-  if(not doubleBulletActive) then return end
-
-  -- crea il proiettile sinistro
-  local lBullet = {}
-  lBullet.img = love.graphics.newImage(doubleBulletSprite)
-  lBullet.x = player.x - player.width / 2
-  lBullet.y = player.y - player.height / 2
-  lBullet.speed = 20
-  lBullet.width = lBullet.img:getWidth()
-  lBullet.height = lBullet.img:getHeight()
-  table.insert(bullets, lBullet)
-
-  -- crea il proiettile destro
-  local rBullet = {}
-  rBullet.img = love.graphics.newImage(doubleBulletSprite)
-  rBullet.x = player.x + player.width / 2
-  rBullet.y = player.y - player.height / 2
-  rBullet.speed = 20
-  rBullet.width = rBullet.img:getWidth()
-  rBullet.height = rBullet.img:getHeight()
-  table.insert(bullets, rBullet)
-
-  love.audio.newSource(doubleBulletAudioSource, "static"):play()
-end
-
-local function createBigBullet()
-  if(not bigBulletActive) then return end
-  if(bigBulletTimer > 0) then return end
-
-  local bullet = {}
-  -- posiziona il proiettile proprio davanti alla navicella
-  bullet.img = love.graphics.newImage(bigBulletSprite)
-  bullet.x = player.x
-  bullet.y = player.y - player.height / 2
-  bullet.speed = 5
-  bullet.width = bullet.img:getWidth()
-  bullet.height = bullet.img:getHeight()
-  bullet.rotation = 0
-  table.insert(bullets, bullet)
-
-  bigBulletTimer = bigBulletFireRate
-
-  love.audio.newSource(bigBulletAudioSource, "static"):play()
-end
-
 local function updateBullets(dt)
   for k,bullet in pairs(bullets) do
     bullet.y = bullet.y - bullet.speed
-    if bullet.rotation then
-      bullet.rotation = bullet.rotation + dt
-    end
+    bullet.shapeHC:moveTo(bullet.x, bullet.y)
 
     if(bullet.y < -50) then
       table.remove(bullets, k)
@@ -124,6 +77,11 @@ end
 local function drawBullets()
   for k,bullet in pairs(bullets) do
     love.graphics.draw(bullet.img, bullet.x, bullet.y, bullet.rotation, 1, 1, bullet.width / 2, bullet.height / 2)
+    if isDebug then
+        love.graphics.setColor(255, 0, 0, 140)
+        bullet.shapeHC:draw('fill')
+        love.graphics.setColor(255, 255, 255, 255)
+    end
   end
 end
 
@@ -138,6 +96,10 @@ function player.load()
   player.height = player.img:getHeight()
   player.x = love.graphics.getWidth() / 2
   player.y = love.graphics.getHeight() - 80
+
+  -- crea il poligono per le collisioni
+  player.shapeHC = HC.polygon(0, -60, player.width / 2, 0, -player.width / 2, 0)
+
 end
 
 function player.update(dt)
@@ -152,29 +114,12 @@ function player.update(dt)
     player.velX = player.velX + player.dec
   end
 
-  if (love.keyboard.isDown("up")) then
-    player.velY = player.velY - player.acc
-  elseif(love.keyboard.isDown("down")) then
-    player.velY = player.velY + player.acc
-  elseif(player.velY > 0) then
-    player.velY = player.velY - player.dec
-  elseif(player.velY < 0) then
-    player.velY = player.velY + player.dec
-  end
-
   -- se velX è estremamente piccola, per sicurezza, la setto a zero
   if(
     player.velX < 0.3 and
     player.velX > -0.3
   ) then
     player.velX = 0
-  end
-
-  if(
-    player.velY < 0.3 and
-    player.velY > -0.3
-  ) then
-    player.velY = 0
   end
 
   -- controllo il movimento orizzontale (bordi, etc.)
@@ -193,21 +138,7 @@ function player.update(dt)
     player.x = player.x + player.velX
   end
 
-  -- controllo il movimento verticale (bordi, etc.)
-  if (player.y < player.height / 2 - player.velY + 100) then
-    player.velY = 0
-    player.y = player.height / 2 + 100
-  elseif (player.y > love.graphics.getHeight() - player.velY - player.height / 2) then
-    player.velY = 0
-    player.y = love.graphics.getHeight() - player.height / 2
-  else
-    if(player.velY > player.maxVel) then
-      player.velY = player.maxVel
-    elseif((player.velY < -player.maxVel)) then
-      player.velY = -player.maxVel
-    end
-    player.y = player.y + player.velY
-  end
+  player.shapeHC:moveTo(player.x, player.y)
 
   updateBullets(dt)
 end
@@ -216,25 +147,20 @@ function player.draw()
   love.graphics.draw(player.img, player.x, player.y, 0, 1, 1, player.width / 2, player.height / 2)
 
   drawBullets()
+
+  -- se in debug mode, mostra gli elementi di HC
+  if isDebug then
+      love.graphics.setColor(255, 0, 0, 255)
+      player.shapeHC:draw('line')
+      love.graphics.setColor(255, 0, 0, 100)
+      player.shapeHC:draw('fill')
+    end
+    love.graphics.setColor(255,255,255, 255)
 end
 
 -- crea un proiettile
 function player.fireBullet()
-  createSingleBullet()
-  createDoubleBullet()
-  createBigBullet()
-end
-
-function player.toggleSingleBullet()
-  singleBulletActive = not singleBulletActive
-end
-
-function player.toggleDoubleBullet()
-  doubleBulletActive = not doubleBulletActive
-end
-
-function player.toggleBigBullet()
-  bigBulletActive = not bigBulletActive
+  createBullet()
 end
 
 return player

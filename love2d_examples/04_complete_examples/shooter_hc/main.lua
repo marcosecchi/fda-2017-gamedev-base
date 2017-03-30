@@ -1,5 +1,10 @@
+local HC = require "libs.HC"
+
+isDebug = true;
+
 player = require ("player")
 background = require ("background")
+meteors = require ("meteors")
 
 function love.load(arg)
   background.load()
@@ -14,6 +19,7 @@ end
 function love.draw()
   background.draw()
   player.draw()
+  love.graphics.print(string.format("Press 'p' key to enter HC debug mode (currently set to: %s)", isDebug))
 end
 
 function love.keypressed(key, scancode, isrepeat)
@@ -27,13 +33,9 @@ function love.keypressed(key, scancode, isrepeat)
     player.fireBullet()
   end
 
-  -- attiva/disattiva i vari proiettili
-  if(key == "1") then
-    player.toggleSingleBullet()
-  elseif(key == "2") then
-    player.toggleDoubleBullet()
-  elseif(key == "3") then
-    player.toggleBigBullet()
+  if(key == "p") then
+    isDebug = not isDebug
+    player.isDebug = isDebug
   end
 
 end
