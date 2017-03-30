@@ -9,16 +9,19 @@ meteors = require ("meteors")
 function love.load(arg)
   background.load()
   player.load()
+  meteors.load()
 end
 
 function love.update(dt)
   background.update(dt)
   player.update(dt)
+  meteors.update(dt)
 end
 
 function love.draw()
   background.draw()
   player.draw()
+  meteors.draw()
   love.graphics.print(string.format("Press 'p' key to enter HC debug mode (currently set to: %s)", isDebug))
 end
 
@@ -36,6 +39,7 @@ function love.keypressed(key, scancode, isrepeat)
   if(key == "p") then
     isDebug = not isDebug
     player.isDebug = isDebug
+    meteors.isDebug = isDebug
   end
 
 end

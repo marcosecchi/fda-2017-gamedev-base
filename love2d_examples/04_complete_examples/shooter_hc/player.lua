@@ -1,10 +1,16 @@
 local HC = require "libs.HC"
 
+--[[
+  *** VARIABILI LOCALI ***
+]]
+
 local player = {}
 
---[[
-  *** VARIABILI GLOBALI ***
-]]
+local sprite = "assets/player.png"
+local bulletSprite = "assets/laser01.png"
+local bulletAudioSource = "assets/laser01.wav"
+
+local bullets = {} -- tabella che conterrà i dati dei proiettili
 
 player.x = 0
 player.y = 0
@@ -16,42 +22,21 @@ player.velY = 0
 player.acc = 2
 player.dec = 0.4
 player.maxVel = 8
-
 player.isDebug = true
-
---[[
-  *** VARIABILI LOCALI ***
-]]
-
-local singleBulletActive = true
-local doubleBulletActive = false
-local bigBulletActive = false
-
-local sprite = "assets/player.png"
-local bulletSprite = "assets/laser01.png"
-
-local bulletAudioSource = "assets/laser01.wav"
-
-local bigBulletFireRate = 1
-local bigBulletTimer = 0;
-
-local bullets = {} -- tabella che conterrà i dati dei proiettili
 
 --[[
   *** FUNZIONI LOCALI ***
 ]]
 
 local function createBullet()
-  if(not singleBulletActive) then return end
-
   local bullet = {}
   -- posiziona il proiettile proprio davanti alla navicella
   bullet.img = love.graphics.newImage(bulletSprite)
-  bullet.x = player.x
-  bullet.y = player.y - player.height / 2
-  bullet.speed = 5
   bullet.width = bullet.img:getWidth()
   bullet.height = bullet.img:getHeight()
+  bullet.x = player.x
+  bullet.y = player.y - player.height / 2 - 10
+  bullet.speed = 25
   bullet.shapeHC = HC.rectangle(0, 0, bullet.width, bullet.height);
   table.insert(bullets, bullet)
 
@@ -64,14 +49,17 @@ local function updateBullets(dt)
     bullet.shapeHC:moveTo(bullet.x, bullet.y)
 
     if(bullet.y < -50) then
+      HC.remove(bullet.shapeHC)
       table.remove(bullets, k)
     end
-  end
 
-  if(bigBulletTimer > 0) then
-    bigBulletTimer = bigBulletTimer - dt
-  end
+    for shape, delta in pairs(HC.collisions(bullet.shapeHC)) do
+  --    text[#text+1] = string.format("Colliding. Separating vector = (%s,%s) - %s -> %s",
+--      delta.x, delta.y, shape.thename, rot)
+      print(shape.type)
+    end
 
+  end
 end
 
 local function drawBullets()
@@ -154,8 +142,8 @@ function player.draw()
       player.shapeHC:draw('line')
       love.graphics.setColor(255, 0, 0, 100)
       player.shapeHC:draw('fill')
-    end
-    love.graphics.setColor(255,255,255, 255)
+  end
+  love.graphics.setColor(255,255,255, 255)
 end
 
 -- crea un proiettile
