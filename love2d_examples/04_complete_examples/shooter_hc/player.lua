@@ -1,4 +1,5 @@
 local HC = require "libs.HC"
+local meteors = require ("meteors")
 
 --[[
   *** VARIABILI LOCALI ***
@@ -15,8 +16,6 @@ local bullets = {} -- tabella che conterrà i dati dei proiettili
 player.x = 0
 player.y = 0
 player.img = nil
-player.width = 0
-player.height = 0
 player.velX = 0
 player.velY = 0
 player.acc = 2
@@ -29,15 +28,12 @@ player.isDebug = true
 ]]
 
 local function createBullet()
-  local bullet = {}
-  -- posiziona il proiettile proprio davanti alla navicella
-  bullet.img = love.graphics.newImage(bulletSprite)
-  bullet.width = bullet.img:getWidth()
-  bullet.height = bullet.img:getHeight()
-  bullet.x = player.x
-  bullet.y = player.y - player.height / 2 - 10
+  local img = love.graphics.newImage(bulletSprite)
+  bullet = HC.rectangle(player.x, player.y - player.img:getHeight() - 20, img:getWidth(), img:getHeight());
+  bullet.img = img
+  bullet.type = "Bullet"
   bullet.speed = 25
-  bullet.shapeHC = HC.rectangle(0, 0, bullet.width, bullet.height);
+
   table.insert(bullets, bullet)
 
   love.audio.newSource(bulletAudioSource, "static"):play()
@@ -45,18 +41,24 @@ end
 
 local function updateBullets(dt)
   for k,bullet in pairs(bullets) do
-    bullet.y = bullet.y - bullet.speed
-    bullet.shapeHC:moveTo(bullet.x, bullet.y)
+    local x, y = bullet:center()
+    y = y - bullet.speed
+    bullet:moveTo(x, y)
 
-    if(bullet.y < -50) then
-      HC.remove(bullet.shapeHC)
+    if(y < -50) then
+      HC.remove(bullet)
       table.remove(bullets, k)
     end
 
-    for shape, delta in pairs(HC.collisions(bullet.shapeHC)) do
+    for shape, delta in pairs(HC.collisions(bullet)) do
+      if(shape.type == "Meteor") then
+        print(shape.type)
+        HC.remove(shape)
+        meteors.remove()
+      end
+
   --    text[#text+1] = string.format("Colliding. Separating vector = (%s,%s) - %s -> %s",
---      delta.x, delta.y, shape.thename, rot)
-      print(shape.type)
+  --    delta.x, delta.y, shape.thename, rot)
     end
 
   end
@@ -64,10 +66,11 @@ end
 
 local function drawBullets()
   for k,bullet in pairs(bullets) do
-    love.graphics.draw(bullet.img, bullet.x, bullet.y, bullet.rotation, 1, 1, bullet.width / 2, bullet.height / 2)
+    local x, y = bullet:center()
+    love.graphics.draw(bullet.img, x, y, 0, 1, 1, bullet.img:getWidth() / 2, bullet.img:getHeight() / 2)
     if isDebug then
         love.graphics.setColor(255, 0, 0, 140)
-        bullet.shapeHC:draw('fill')
+        bullet:draw('fill')
         love.graphics.setColor(255, 255, 255, 255)
     end
   end
@@ -80,13 +83,11 @@ end
 -- inizializza i dati della navicella
 function player.load()
   player.img = love.graphics.newImage(sprite)
-  player.width = player.img:getWidth()
-  player.height = player.img:getHeight()
   player.x = love.graphics.getWidth() / 2
   player.y = love.graphics.getHeight() - 80
 
   -- crea il poligono per le collisioni
-  player.shapeHC = HC.polygon(0, -60, player.width / 2, 0, -player.width / 2, 0)
+  player.shapeHC = HC.polygon(0, -60, player.img:getWidth() / 2, 0, -player.img:getWidth() / 2, 0)
 
 end
 
@@ -111,12 +112,12 @@ function player.update(dt)
   end
 
   -- controllo il movimento orizzontale (bordi, etc.)
-  if (player.x < player.width / 2 - player.velX) then
+  if (player.x < player.img:getWidth() / 2 - player.velX) then
     player.velX = 0
-    player.x = player.width / 2
-  elseif (player.x > love.graphics.getWidth() - player.velX - player.width / 2) then
+    player.x = player.img:getWidth() / 2
+  elseif (player.x > love.graphics.getWidth() - player.velX - player.img:getWidth() / 2) then
     player.velX = 0
-    player.x = love.graphics.getWidth() - player.width / 2
+    player.x = love.graphics.getWidth() - player.img:getWidth() / 2
   else
     if(player.velX > player.maxVel) then
       player.velX = player.maxVel
@@ -132,7 +133,7 @@ function player.update(dt)
 end
 
 function player.draw()
-  love.graphics.draw(player.img, player.x, player.y, 0, 1, 1, player.width / 2, player.height / 2)
+  love.graphics.draw(player.img, player.x, player.y, 0, 1, 1, player.img:getWidth() / 2, player.img:getHeight() / 2)
 
   drawBullets()
 

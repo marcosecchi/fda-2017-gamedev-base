@@ -10,24 +10,16 @@ local sprite = "assets/meteor1.png"
 meteors.isDebug = true
 
 --[[
-  *** FUNZIONI LOCALI ***
-]]
-
---[[
   *** FUNZIONI GLOBALI ***
 ]]
 
 function meteors.load()
-  meteor = {
 
-  }
-  meteor.img = love.graphics.newImage(sprite)
-  meteor.x = 100
-  meteor.y = 100
-  meteor.width = meteor.img:getWidth()
-  meteor.height = meteor.img:getHeight()
-  meteor.shapeHC = HC.circle(meteor.x, meteor.y, meteor.width / 2);
-  meteor.shapeHC.type = "Meteor"
+  local posX, posY = 100, 100
+  local img = love.graphics.newImage(sprite)
+  meteor = HC.circle(posX, posY, img:getWidth() / 2);
+  meteor.type = "Meteor"
+  meteor.img = img
 
   table.insert(meteors, meteor)
 end
@@ -37,16 +29,22 @@ function meteors.update(dt)
 end
 
 function meteors.draw()
-  love.graphics.draw(meteor.img, meteor.x, meteor.y, 0, 1, 1, meteor.width / 2, meteor.height / 2)
+  if not meteor then return end
+  local x, y = meteor:center()
+  love.graphics.draw(meteor.img, x, y, 0, 1, 1, meteor.img:getWidth() / 2, meteor.img:getHeight() / 2)
 
   -- se in debug mode, mostra gli elementi di HC
   if isDebug then
       love.graphics.setColor(255, 0, 0, 255)
-      meteor.shapeHC:draw('line')
+      meteor:draw('line')
       love.graphics.setColor(255, 0, 0, 100)
-      meteor.shapeHC:draw('fill')
+      meteor:draw('fill')
   end
   love.graphics.setColor(255,255,255, 255)
+end
+
+function meteors.remove()
+  meteor = nil
 end
 
 return meteors
