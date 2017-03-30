@@ -61,7 +61,7 @@ function love.update(dt)
     skeleton:switch('walk-right', true)
     nextX = nextX + speed
   else
-    skeleton:goToFrame(1)
+    skeleton:goToFrame(8)
   end
 
   if(nextX >= 32 and nextX <= love.graphics.getWidth() - 32) then
