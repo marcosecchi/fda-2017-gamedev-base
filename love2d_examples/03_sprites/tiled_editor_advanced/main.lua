@@ -92,10 +92,11 @@ function love.keypressed(keyValue, scancode, isrepeat)
     end
   end
 
-  -- se ha trovato l'uscita riposiziona al punto di partenza
+  -- se ha raccolto il tesoro resetta e riposiziona al punto di partenza
   if player.x == chest.x and player.y == chest.y then
     player.x = player.startX
     player.y = player.startY
+    keyTaken = false
   end
 end
 
