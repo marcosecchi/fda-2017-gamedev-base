@@ -20,7 +20,7 @@ meteorsController.isDebug = true
 function generateMeteors()
   -- genera tre meteoriti e li aggiunge alla lista
   for i=1,3 do
-    local posX, posY = 130 * i, 200 + love.math.random(-100, 100)
+    local posX, posY = 130 * i, -100
     local img = love.graphics.newImage(sprites[i])
     local meteor = HC.circle(posX, posY, img:getWidth() / 2);
     meteor.type = "Meteor"
@@ -28,6 +28,7 @@ function generateMeteors()
     meteor.points = 10 * i
     meteor.rotation = 0
     meteor.rotationSpeed = i
+    meteor.speed = love.math.random(100, 200)
 
     table.insert(meteorList, meteor)
   end
@@ -44,6 +45,10 @@ end
 function meteorsController.update(dt)
   for i,meteor in ipairs(meteorList) do
     meteor.rotation = meteor.rotation + meteor.rotationSpeed * dt
+
+    local x, y = meteor:center()
+    y = y + dt * meteor.speed
+    meteor:moveTo(x, y)
   end
 end
 
