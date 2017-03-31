@@ -11,7 +11,7 @@ local sprite = "assets/player.png"
 local bulletSprite = "assets/laser01.png"
 local bulletAudioSource = "assets/laser01.wav"
 
-local bullets = {} -- tabella che conterrà i dati dei proiettili
+local bulletList = {} -- tabella che conterrà i dati dei proiettili
 
 playerController.x = 0
 playerController.y = 0
@@ -34,38 +34,46 @@ local function createBullet()
   bullet.type = "Bullet"
   bullet.speed = 25
 
-  table.insert(bullets, bullet)
+  table.insert(bulletList, bullet)
 
   love.audio.newSource(bulletAudioSource, "static"):play()
 end
 
 local function updateBullets(dt)
-  for k,bullet in pairs(bullets) do
+  -- muove i proiettili
+  for k,bullet in pairs(bulletList) do
     local x, y = bullet:center()
     y = y - bullet.speed
     bullet:moveTo(x, y)
 
     if(y < -50) then
       HC.remove(bullet)
-      table.remove(bullets, k)
+      table.remove(bulletList, k)
     end
 
     for shape, delta in pairs(HC.collisions(bullet)) do
       if(shape.type == "Meteor") then
-        print("Collision with: " .. shape.type)
+        print("Collision with: " .. shape.type .. "(" .. shape.points .. " points)")
+
+        -- distrugge il meteorite
         HC.remove(shape)
         meteorsController.remove(shape)
+
+        -- distrugge il proiettile
+        HC.remove(bullet)
+        for i,value in ipairs(bulletList) do
+          if bullet == value then
+            table.remove(bulletList, i)
+            break
+          end
+        end
       end
-
-  --    text[#text+1] = string.format("Colliding. Separating vector = (%s,%s) - %s -> %s",
-  --    delta.x, delta.y, shape.thename, rot)
     end
-
   end
 end
 
 local function drawBullets()
-  for k,bullet in pairs(bullets) do
+  for k,bullet in pairs(bulletList) do
     local x, y = bullet:center()
     love.graphics.draw(bullet.img, x, y, 0, 1, 1, bullet.img:getWidth() / 2, bullet.img:getHeight() / 2)
     if isDebug then

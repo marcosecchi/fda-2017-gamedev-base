@@ -14,22 +14,31 @@ local meteorList = {}
 meteorsController.isDebug = true
 
 --[[
-  *** FUNZIONI GLOBALI ***
+  *** FUNZIONI LOCALI ***
 ]]
 
-function meteorsController.load()
-
+function generateMeteors()
+  -- genera tre meteoriti e li aggiunge alla lista
   for i=1,3 do
-    local posX, posY = 130 * i, 100
+    local posX, posY = 130 * i, 200 + love.math.random(-100, 100)
     local img = love.graphics.newImage(sprites[i])
     local meteor = HC.circle(posX, posY, img:getWidth() / 2);
     meteor.type = "Meteor"
     meteor.img = img
+    meteor.points = 10 * i
     meteor.rotation = 0
     meteor.rotationSpeed = i
 
     table.insert(meteorList, meteor)
   end
+end
+
+--[[
+  *** FUNZIONI GLOBALI ***
+]]
+
+function meteorsController.load()
+  generateMeteors()
 end
 
 function meteorsController.update(dt)
@@ -55,10 +64,17 @@ function meteorsController.draw()
 end
 
 function meteorsController.remove(meteor)
+  -- rimuove un meteorite dalla lista
   for i,value in ipairs(meteorList) do
     if meteor == value then
       table.remove(meteorList, i)
+      break
     end
+  end
+
+  -- se non esistono più meteoriti nella lista, rigenerali
+  if table.getn(meteorList) == 0 then
+    generateMeteors()
   end
 end
 
