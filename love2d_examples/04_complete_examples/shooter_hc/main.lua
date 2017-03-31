@@ -2,26 +2,26 @@ local HC = require "libs.HC"
 
 isDebug = true;
 
-player = require ("player")
-background = require ("background")
-meteors = require ("meteors")
+playerController = require ("playerController")
+backgroundController = require ("backgroundController")
+meteorsController = require ("meteorsController")
 
 function love.load(arg)
-  background.load()
-  player.load()
-  meteors.load()
+  backgroundController.load()
+  playerController.load()
+  meteorsController.load()
 end
 
 function love.update(dt)
-  background.update(dt)
-  player.update(dt)
-  meteors.update(dt)
+  backgroundController.update(dt)
+  playerController.update(dt)
+  meteorsController.update(dt)
 end
 
 function love.draw()
-  background.draw()
-  player.draw()
-  meteors.draw()
+  backgroundController.draw()
+  playerController.draw()
+  meteorsController.draw()
   love.graphics.print(string.format("Press 'p' key to enter HC debug mode (currently set to: %s)", isDebug))
 end
 
@@ -33,13 +33,13 @@ function love.keypressed(key, scancode, isrepeat)
 
   -- se è premuto space, spara un proiettile
   if(key == "space") then
-    player.fireBullet()
+    playerController.fireBullet()
   end
 
   if(key == "p") then
     isDebug = not isDebug
-    player.isDebug = isDebug
-    meteors.isDebug = isDebug
+    playerController.isDebug = isDebug
+    meteorsController.isDebug = isDebug
   end
 
 end
