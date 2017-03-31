@@ -13,6 +13,8 @@ local bulletAudioSource = "assets/laser01.wav"
 
 local bulletList = {} -- tabella che conterrà i dati dei proiettili
 
+local points = 0
+
 playerController.x = 0
 playerController.y = 0
 playerController.img = nil
@@ -22,6 +24,7 @@ playerController.acc = 2
 playerController.dec = 0.4
 playerController.maxVel = 8
 playerController.isDebug = true
+playerController.status = "play"
 
 --[[
   *** FUNZIONI LOCALI ***
@@ -53,7 +56,8 @@ local function updateBullets(dt)
 
     for shape, delta in pairs(HC.collisions(bullet)) do
       if(shape.type == "Meteor") then
-        print("Collision with: " .. shape.type .. "(" .. shape.points .. " points)")
+        -- print("Collision with: " .. shape.type .. "(" .. shape.points .. " points)")
+        points = points + shape.points
 
         -- distrugge il meteorite
         HC.remove(shape)
@@ -100,6 +104,12 @@ function playerController.load()
 end
 
 function playerController.update(dt)
+
+  -- se il gioco è finito, ritorna senza aggiornare nulla
+  if playerController.status == "game over" then
+    return
+  end
+
   -- controllo il movimento della navicella
   if (love.keyboard.isDown("left")) then
     playerController.velX = playerController.velX - playerController.acc
@@ -138,9 +148,29 @@ function playerController.update(dt)
   playerController.shapeHC:moveTo(playerController.x, playerController.y)
 
   updateBullets(dt)
+
+  for shape, delta in pairs(HC.collisions(playerController.shapeHC)) do
+    if(shape.type == "Meteor") then
+      -- print("Collision with: " .. shape.type .. "(" .. shape.points .. " points)")
+
+      -- distrugge il meteorite
+      HC.remove(shape)
+      meteorsController.remove(shape)
+      meteorsController.remove(playerController.shapeHC)
+      playerController.status = "game over"
+    end
+  end
+
 end
 
 function playerController.draw()
+  -- se il gioco è finito, ritorna senza disegnare nulla
+  if playerController.status == "game over" then
+    love.graphics.printf("GAME OVER", 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), "center")
+    love.graphics.printf("Press spacebar to play again", 0, love.graphics.getHeight() / 2 + 20, love.graphics.getWidth(), "center")
+    return
+  end
+
   love.graphics.draw(playerController.img, playerController.x, playerController.y, 0, 1, 1, playerController.img:getWidth() / 2, playerController.img:getHeight() / 2)
 
   drawBullets()
@@ -153,6 +183,8 @@ function playerController.draw()
       playerController.shapeHC:draw('fill')
   end
   love.graphics.setColor(255,255,255, 255)
+
+  love.graphics.print("Points: " .. points, 10, love.graphics.getHeight() - 20)
 end
 
 -- crea un proiettile

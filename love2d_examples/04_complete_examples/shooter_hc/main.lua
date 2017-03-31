@@ -22,7 +22,7 @@ function love.draw()
   backgroundController.draw()
   playerController.draw()
   meteorsController.draw()
-  love.graphics.print(string.format("Press 'p' key to enter HC debug mode (currently set to: %s)", isDebug))
+  love.graphics.print(string.format("Press 'p' key to enter HC debug mode (currently set to: %s)", isDebug), 10, 10)
 end
 
 function love.keypressed(key, scancode, isrepeat)
@@ -31,8 +31,9 @@ function love.keypressed(key, scancode, isrepeat)
     love.event.push('quit')
   end
 
-  -- se è premuto space, spara un proiettile
-  if(key == "space") then
+  if(key == "space" and playerController.status == "game over") then
+    playerController.status = "play"
+  elseif(key == "space") then
     playerController.fireBullet()
   end
 
