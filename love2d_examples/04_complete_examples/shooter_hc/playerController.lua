@@ -10,6 +10,8 @@ local playerController = {}
 local sprite = "assets/player.png"
 local bulletSprite = "assets/laser01.png"
 local bulletAudioSource = "assets/laser01.wav"
+local meteorExplosionAudioSource = "assets/meteorExplosion.wav"
+local explosionAudioSource = "assets/explosion.wav"
 
 local bulletList = {} -- tabella che conterrà i dati dei proiettili
 
@@ -62,6 +64,7 @@ local function updateBullets(dt)
         -- distrugge il meteorite
         HC.remove(shape)
         meteorsController.remove(shape)
+        love.audio.newSource(meteorExplosionAudioSource, "static"):play()
 
         -- distrugge il proiettile
         HC.remove(bullet)
@@ -151,12 +154,12 @@ function playerController.update(dt)
 
   for shape, delta in pairs(HC.collisions(playerController.shapeHC)) do
     if(shape.type == "Meteor") then
-      -- print("Collision with: " .. shape.type .. "(" .. shape.points .. " points)")
 
       -- distrugge il meteorite
       HC.remove(shape)
       meteorsController.remove(shape)
       meteorsController.remove(playerController.shapeHC)
+      love.audio.newSource(explosionAudioSource, "static"):play()
       playerController.status = "game over"
     end
   end
