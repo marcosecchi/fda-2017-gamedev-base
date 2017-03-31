@@ -79,6 +79,9 @@ function love.keypressed(keyValue, scancode, isrepeat)
       end
     end
   end
+  if(nextX == chest.x and nextY == chest.y and not keyTaken) then
+    canMove = false
+  end
 
   -- se è possibile muoversi, aggiorna la posizione del personaggio
   if(canMove) then
