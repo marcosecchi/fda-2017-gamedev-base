@@ -49,6 +49,10 @@ function meteorsController.update(dt)
     local x, y = meteor:center()
     y = y + dt * meteor.speed
     meteor:moveTo(x, y)
+
+    if(y > love.graphics.getHeight() + 50) then
+      meteorsController.remove(meteor)
+    end
   end
 end
 
