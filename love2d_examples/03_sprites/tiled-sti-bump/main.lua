@@ -40,7 +40,7 @@ function love.update(dt)
     player.x, player.y, cols, cols_len = world:move(player, player.x + dx, player.y + dy, filterMovement)
     for _,col in ipairs(cols) do
       if col.other.properties.impassable then
-        player.status = "On impassable terrain"
+        player.status = "Touching impassable terrain"
       elseif col.other.properties.hot then
         player.status = "On hot terrain"
       end
