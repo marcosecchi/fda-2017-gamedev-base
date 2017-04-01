@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="10">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="terrain.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Background" width="10" height="10">
+  <data encoding="csv">
+125,125,125,125,125,125,125,125,214,125,
+125,278,279,279,279,279,279,279,280,125,
+125,310,311,311,311,311,311,311,312,125,
+125,310,311,311,311,311,311,215,344,125,
+125,310,311,311,311,311,311,312,376,125,
+125,310,311,311,311,311,311,312,125,125,
+125,310,311,311,311,311,311,312,125,125,
+125,310,311,311,311,311,311,312,125,376,
+125,342,343,343,343,343,343,344,125,125,
+125,246,125,125,125,125,125,376,125,125
+</data>
+ </layer>
+ <layer name="Deco" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,16,0,193,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,193,0,0,637,0,0,0,0,
+0,0,0,0,0,669,0,0,0,0,
+0,0,0,16,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="Impassable" visible="0">
+  <properties>
+   <property name="collidable" type="bool" value="true"/>
+   <property name="impassable" type="bool" value="true"/>
+  </properties>
+  <object id="1" x="0" y="0" width="320" height="64">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="impassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2" x="0" y="64" width="64" height="256">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="impassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="3" x="64" y="256" width="256" height="64">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="impassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" x="256" y="64" width="64" height="192">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="impassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="6" x="224" y="96" width="32" height="160">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="impassable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="7" x="160" y="160" width="32" height="64">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="impassable" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Hot" visible="0">
+  <object id="8" x="96" y="96" width="32" height="32">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="hot" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="9" x="96" y="224" width="32" height="32">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="hot" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
