@@ -69,6 +69,10 @@ function meteorsController.draw()
         meteor:draw('fill')
     end
     love.graphics.setColor(255,255,255, 255)
+
+    if y > love.graphics.getHeight() + 50 then
+        meteorsController.remove(meteor)
+    end
   end
 end
 
