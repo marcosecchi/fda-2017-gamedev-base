@@ -2,9 +2,9 @@ function love.load(arg)
   cowboy = dofile("cowboy.lua")
   cowgirl = dofile("cowgirl.lua")
 
-  frame = 1;  -- definisci il frame selezionato
-  selectedCharacter = cowboy  -- definisci il personaggio selezionato
-  frameDuration = 0.10  -- definisci la durata di un frame
+  frame = 1;  -- definisce il frame selezionato
+  selectedCharacter = cowboy  -- definisce il personaggio selezionato
+  frameDuration = 0.10  -- definisce la durata di un frame
   timeElapsed = 0 -- calcola il tempo per il cambiamento dei frame
 end
 

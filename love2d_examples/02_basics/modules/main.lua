@@ -1,6 +1,4 @@
---[[
-  Questo esempio mostra l'utilizzo dei modulo in Lua
-]]
+-- Questo esempio mostra l'utilizzo dei moduli in Lua
 
 player = require ("lib/player") -- carica il modulo
 
@@ -13,10 +11,6 @@ function love.load(arg)
   -- definisco la posizione di partenza dello sprite
   player.posX = love.graphics.getWidth() / 2
   player.posY = love.graphics.getHeight() - 80
-end
-
-function love.update(dt)
-
 end
 
 function love.draw()

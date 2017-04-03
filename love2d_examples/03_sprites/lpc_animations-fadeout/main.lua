@@ -1,8 +1,8 @@
-local sodapop = require 'sodapop'
+local sodapop = require 'libs.sodapop'
 
 function love.load(arg)
-  bg = love.graphics.newImage("bg.png")
-  skeletonSpritesheet = love.graphics.newImage("skeleton.png")
+  bg = love.graphics.newImage("assets/bg.png")
+  skeletonSpritesheet = love.graphics.newImage("assets/skeleton.png")
   posX, posY = 0, 0
   speed = 1
 
@@ -13,13 +13,15 @@ function love.load(arg)
   fadeSpeed = 150      -- velocità rispetto al deltatime
   showStencil = true
 
+  -- instanzia uno sprite animato con sodapop
   skeleton = sodapop.newAnimatedSprite()
 
+  -- definisce le animazioni
   skeleton:addAnimation('walk-right', {
-    image = skeletonSpritesheet,
-    frameWidth = 64,
-    frameHeight = 64,
-    frames = {
+    image = skeletonSpritesheet, -- spritesheet da cui prendere le immagini
+    frameWidth = 64,             -- larghezza di uno sprite
+    frameHeight = 64,            -- altezza di uno sprite
+    frames = {                   -- definizione dei frame e della loro durata
       {2, 12, 9, 12, .1}
     }
   })
@@ -105,15 +107,20 @@ local function circleStencilFunction()
 end
 
 function love.draw()
+
+  -- se lo stencil va mostrato, lo disegna a schermo
   if showStencil then
     love.graphics.stencil(circleStencilFunction, "replace", 1)
     love.graphics.setStencilTest("greater", 0)
   end
+
   love.graphics.draw(bg)
   skeleton:draw()
+
+  -- chiude la fase di disegno dello stencil
   if showStencil then
     love.graphics.setStencilTest()
   end
 
-  love.graphics.print("Press 'p' to toggle stencil")
+  love.graphics.print("Press 'p' to toggle stencil", 10, 10)
 end

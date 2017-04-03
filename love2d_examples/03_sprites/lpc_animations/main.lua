@@ -1,13 +1,14 @@
-local sodapop = require 'sodapop'
+local sodapop = require 'libs.sodapop'
 
 function love.load(arg)
-  skeletonSpritesheet = love.graphics.newImage("skeleton.png")
+  skeletonSpritesheet = love.graphics.newImage("assets/skeleton.png")
   posX, posY = 0, 0
   speed = 1
 
+  -- instanzia uno sprite animato con sodapop
   skeleton = sodapop.newAnimatedSprite()
 
-  -- definisco le verie animazioni
+  -- definisce le animazioni
   skeleton:addAnimation('walk-right', {
     image = skeletonSpritesheet, -- spritesheet da cui prendere le immagini
     frameWidth = 64,             -- larghezza di uno sprite

@@ -1,3 +1,4 @@
+-- elenco delle immagini utilizzate per l'animazione
 return {
   animations = {
     "assets/images/cowboy/Idle_000.png",
