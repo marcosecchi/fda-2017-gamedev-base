@@ -26,8 +26,6 @@ function love.load()
 end
 
 function love.update(dt)
-  player.status = "On walkable terrain"
-
   -- calcola il delta di movimento del personaggio
   local dx, dy = 0, 0
   if love.keyboard.isDown('right') then
@@ -53,13 +51,20 @@ function love.update(dt)
         player.status = "On hot terrain"
       end
     end
+    if(cols_len == 0) then
+      player.status = "On walkable terrain"
+    end
   end
 end
 
 function love.draw()
 	map:draw()
 
-  love.graphics.setColor(0, 0, 0, 70)
+  if player.status == "On hot terrain" then
+    love.graphics.setColor(255, 0, 0, 150)
+  else
+    love.graphics.setColor(0, 0, 0, 70)
+  end
   love.graphics.rectangle("fill", player.x, player.y, player.w, player.h)
   love.graphics.setColor(0, 0, 0, 255)
   love.graphics.rectangle("line", player.x, player.y, player.w, player.h)
