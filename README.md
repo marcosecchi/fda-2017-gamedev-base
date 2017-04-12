@@ -2,6 +2,8 @@
 
 <p align="center">
 <img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png" alt="Logo FDA" /><br />
+</p>
+<p align="center">
 <img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logodbga.png" alt="Logo DBGA" />
 </p>
 
@@ -26,10 +28,10 @@ Dove si realizzerà un videogioco, lavorando in gruppo ed utilizzando le conosce
 ## Alcuni esempi del materiale contenuto nel repository
 
 <p align="center">
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen01.png"/><br />
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen02.png"/>
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen03.png"/><br />
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen04.png"/>
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen05.png"/><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen01.png"/><br /><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen02.png"/><br /><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen03.png"/><br /><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen04.png"/><br /><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen05.png"/><br /><br />
 <img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen06.png"/>
 </p>
