@@ -1,7 +1,7 @@
 # Introduzione allo Sviluppo di Progetti Videoludici
 
 <p align="center">
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png" alt="Logo FDA" />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png" alt="Logo FDA" /><br />
 <img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logodbga.png" alt="Logo DBGA" />
 </p>
 
@@ -22,3 +22,14 @@ Dove si introdurranno le basi della programmazione e se ne apprenderanno le prin
 
 ### Progetto Applicativo
 Dove si realizzerà un videogioco, lavorando in gruppo ed utilizzando le conoscenze apprese durante il corso.
+
+## Alcuni esempi del materiale contenuto nel repository
+
+<p align="center">
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen01.png"/><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen02.png"/>
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen03.png"/><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen04.png"/>
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen05.png"/><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/screen06.png"/>
+</p>
