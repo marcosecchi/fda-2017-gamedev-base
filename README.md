@@ -1,7 +1,9 @@
 # Introduzione allo Sviluppo di Progetti Videoludici
 
-![FDA Logo](https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png)<br />
-![DBGA Logo](https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logodbga.png)
+<p align="center">
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png" alt="Logo FDA" />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logodbga.png" alt="Logo DBGA" />
+</p>
 
 **[Fastweb Digital Academy](https://www.fastwebdigital.academy/) + [DigitalBros Game Academy](http://www.dbgameacademy.it/)**
 *13 marzo - 7 aprile 2017*
