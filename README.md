@@ -1,7 +1,7 @@
 # Introduzione allo Sviluppo di Progetti Videoludici
 
 <p align="center">
-<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png" alt="Logo FDA" /><br />
+<img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logofwda.png" alt="Logo FDA" /><br /><br />
 </p>
 <p align="center">
 <img src="https://github.com/marcosecchi/fda-2017-gamedev-base/blob/master/images/logodbga.png" alt="Logo DBGA" />
